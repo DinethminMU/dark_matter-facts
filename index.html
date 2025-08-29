@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark Matter Fun Facts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #181c24;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #23283a;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      padding: 2rem 2.5rem;
+      max-width: 500px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #ffb347;
+    }
+    #fact {
+      font-size: 1.2rem;
+      margin: 1.5rem 0;
+      min-height: 80px;
+      transition: color 0.3s;
+    }
+    button {
+      background: #ffb347;
+      color: #23283a;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #ffd580;
+    }
+    .share-btn {
+      margin-top: 1rem;
+      background: #7289da;
+      color: #fff;
+    }
+    .share-btn:hover {
+      background: #99aab5;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 1rem;
+        max-width: 95vw;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      #fact {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌌 Dark Matter Fun Facts</h1>
+    <div id="fact"></div>
+    <button onclick="showRandomFact()">Show Me a Fun Fact!</button>
+    <button class="share-btn" onclick="shareFact()">Share This Fact</button>
+  </div>
+  <script>
+    const facts = [
+      "Dark matter does not emit, absorb, or reflect light, making it invisible and detectable only through its gravitational effects on visible matter, radiation, and the large-scale structure of the universe.",
+      "Scientists estimate that about 27% of the universe is made up of dark matter, while only about 5% is ordinary (baryonic) matter. The rest is dark energy.",
+      "The concept of dark matter was first proposed by Swiss astronomer Fritz Zwicky in the 1930s, when he observed that galaxies in the Coma Cluster were moving faster than could be explained by visible matter alone.",
+      "Dark matter is not made up of black holes or any other known type of compact object. It’s thought to be made of unknown, non-baryonic particles.",
+      "Two leading hypothetical candidates for dark matter particles are WIMPs (Weakly Interacting Massive Particles) and axions. Neither has been detected yet.",
+      "Without dark matter, galaxies would not have enough mass to hold themselves together—the stars would fly apart!",
+      "One of the strongest pieces of evidence for dark matter comes from observations of the Bullet Cluster, where the visible matter (hot gas) and gravitational mass (from dark matter) are separated due to a collision of galaxy clusters.",
+      "Despite decades of research, no one knows exactly what dark matter is. It remains one of the biggest unsolved mysteries in physics."
+    ];
+
+    let lastFactIndex = -1;
+
+    function showRandomFact() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * facts.length);
+      } while (idx === lastFactIndex && facts.length > 1);
+      lastFactIndex = idx;
+      document.getElementById('fact').textContent = facts[idx];
+    }
+
+    function shareFact() {
+      const fact = document.getElementById('fact').textContent;
+      if (!fact) {
+        alert('Click "Show Me a Fun Fact!" first!');
+        return;
+      }
+      if (navigator.share) {
+        navigator.share({
+          title: 'Dark Matter Fun Fact',
+          text: fact,
+          url: window.location.href
+        });
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(fact).then(() => {
+          alert('Fact copied to clipboard! Share it with your friends.');
+        }, () => {
+          alert('Could not copy fact to clipboard.');
+        });
+      }
+    }
+
+    // Show a fact on load
+    showRandomFact();
+  </script>
+</body>
+</html>

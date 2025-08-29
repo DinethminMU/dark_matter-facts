@@ -49,14 +49,6 @@
     button:hover {
       background: #ffd580;
     }
-    .share-btn {
-      margin-top: 1rem;
-      background: #7289da;
-      color: #fff;
-    }
-    .share-btn:hover {
-      background: #99aab5;
-    }
     @media (max-width: 600px) {
       .container {
         padding: 1rem;
@@ -75,8 +67,7 @@
   <div class="container">
     <h1>🌌 Dark Matter Fun Facts</h1>
     <div id="fact"></div>
-    <button onclick="showRandomFact()">Show Me a Fun Fact!</button>
-    <button class="share-btn" onclick="shareFact()">Share This Fact</button>
+    <button id="show-fact-btn">Show Me a Fun Fact!</button>
   </div>
   <script>
     const facts = [
@@ -101,27 +92,7 @@
       document.getElementById('fact').textContent = facts[idx];
     }
 
-    function shareFact() {
-      const fact = document.getElementById('fact').textContent;
-      if (!fact) {
-        alert('Click "Show Me a Fun Fact!" first!');
-        return;
-      }
-      if (navigator.share) {
-        navigator.share({
-          title: 'Dark Matter Fun Fact',
-          text: fact,
-          url: window.location.href
-        });
-      } else {
-        // Fallback: copy to clipboard
-        navigator.clipboard.writeText(fact).then(() => {
-          alert('Fact copied to clipboard! Share it with your friends.');
-        }, () => {
-          alert('Could not copy fact to clipboard.');
-        });
-      }
-    }
+    document.getElementById('show-fact-btn').addEventListener('click', showRandomFact);
 
     // Show a fact on load
     showRandomFact();

@@ -9,7 +9,7 @@ A small web project that displays random facts about **dark matter** using **HTM
 
 ## Deployment
 This project is **deployed using GitHub Pages**.  
-You can access it here: (https://dinethminmu.github.io/dark_matter-facts/)
+You can access it here: ( https://dinethminmu.github.io/dark_matter-facts/ )
 
 ## Tech Stack
 - HTML
